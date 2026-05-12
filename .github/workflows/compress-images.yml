@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     paths:
-      - '**.png'
+      - '**.webp'
 
 jobs:
   compress-images:

@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-    name: Validate metadata and PNG files
+    name: Validate metadata and WebP files
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -49,26 +49,26 @@ jobs:
                   if not isinstance(value, str) or not value.strip():
                       errors.append(f"**[{label}]** Field `{field}` must not be blank.")
 
-              # Check filename follows the naming convention: {Name}_{Author}.png or {Name}.png
+              # Check filename follows the naming convention: {Name}_{Author}.webp or {Name}.webp
               name = entry.get("Name", "").strip()
               author = entry.get("Author", "").strip()
               filename = entry.get("Filename", "").strip()
               if name and author and filename:
-                  expected_full = f"{name}_{author}.png"
-                  expected_short = f"{name}.png"
+                  expected_full = f"{name}_{author}.webp"
+                  expected_short = f"{name}.webp"
                   if filename not in (expected_full, expected_short):
                       errors.append(
                           f"**[{label}]** Filename `{filename}` is incorrect. "
                           f"Expected `{expected_full}` (or `{expected_short}`)."
                       )
 
-              # Check that the PNG file exists in IconPack/ and is below 500 KB
+              # Check that the WebP file exists in IconPack/ and is below 500 KB
               if filename:
-                  png_path = os.path.join("IconPack", filename)
-                  if not os.path.isfile(png_path):
-                      errors.append(f"**[{label}]** PNG file `{filename}` not found in `IconPack/`.")
+                  webp_path = os.path.join("IconPack", filename)
+                  if not os.path.isfile(webp_path):
+                      errors.append(f"**[{label}]** WebP file `{filename}` not found in `IconPack/`.")
                   else:
-                      size_kb = os.path.getsize(png_path) / 1024
+                      size_kb = os.path.getsize(webp_path) / 1024
                       if size_kb >= 500:
                           errors.append(f"**[{label}]** `{filename}` is {size_kb:.1f} KB — must be below 500 KB.")
 
@@ -88,7 +88,7 @@ jobs:
               sys.exit(1)
           else:
               with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
-                  f.write("## ✅ Validation Passed\n\nAll metadata fields are valid and PNG files exist.\n")
+                  f.write("## ✅ Validation Passed\n\nAll metadata fields are valid and WebP files exist.\n")
               print("All checks passed!")
           EOF
 
@@ -107,9 +107,9 @@ jobs:
               '',
               '**Rules:**',
               '- `Name`, `Author`, and `Filename` fields in `metadata.json` must not be blank.',
-              '- Every `Filename` entry must have a matching PNG file inside `IconPack/`.',
-              '- Filename must follow the format `{Name}_{Author}.png` (or `{Name}.png`).',
-              '- PNG files must be **below 500 KB**.',
+              '- Every `Filename` entry must have a matching WebP file inside `IconPack/`.',
+              '- Filename must follow the format `{Name}_{Author}.webp` (or `{Name}.webp`).',
+              '- WebP files must be **below 500 KB**.',
               '- `Link` is optional and may be left empty.',
             ].join('\n');
 
@@ -129,5 +129,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: '## ✅ Icon Pack Validation Passed\n\nAll metadata fields are valid and all PNG files exist in `IconPack/`.',
+              body: '## ✅ Icon Pack Validation Passed\n\nAll metadata fields are valid and all WebP files exist in `IconPack/`.',
             });
