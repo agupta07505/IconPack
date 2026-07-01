@@ -20,6 +20,26 @@
     "GitHubAuthorUrl": "https://github.com/raspweed"
   },
   {
+    "Id": "950492",
+    "Name": "Frostwave - Japanese Winter",
+    "Author": "Animesh",
+    "Filename": "IconFrostwaveJapaneseWinterByAnimesh950492.kt",
+    "Source": "frostwave_japanese_winter_animesh_950492.xml",
+    "Submission": "submissions/Frostwave.svg",
+    "Link": "",
+    "GitHubAuthorUrl": "https://github.com/agupta07505"
+  },
+  {
+    "Id": "417667",
+    "Name": "Suzume",
+    "Author": "Animesh",
+    "Filename": "IconSuzumeByAnimesh417667.kt",
+    "Source": "suzume_animesh_417667.xml",
+    "Submission": "submissions/Suzume.svg",
+    "Link": "",
+    "GitHubAuthorUrl": "https://github.com/agupta07505"
+  },
+  {
     "Id": "152487",
     "Name": "Sakura Retro",
     "Author": "morrieeattonkatsu",
